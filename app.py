@@ -2,10 +2,11 @@ from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
+list_of_fruits = ['apples', 'bananas', 'oranges']
 
 @app.route('/')
 def home():
-	return render_template('home.html')
+	return render_template('home.html', fruits=list_of_fruits)
 
 if __name__ == "__main__":
 	port = int(os.environ.get("PORT", 5000))

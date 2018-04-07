@@ -1,5 +1,5 @@
 # basic-flask
 
-This step contains the absolute basics of a Flask app.
+This step contains shows one of the most common templating examples: a for loop.
 
-One route which renders one page with zero templating.
+This is the foundation for any kind of dynamic web programming.
