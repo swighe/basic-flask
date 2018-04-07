@@ -1,0 +1,25 @@
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<html>
+	<body>
+		<h1>The 5 Boroughs of NYC</h1>
+		<!-- <table> -->
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>County Name</th>
+				<th>Area</th>
+				<th>Population</th>
+			</tr>
+			{% for b in boroughs %}
+				<tr>
+					<td>{{b.name}}</td>
+					<td>{{b.county_name}}</td>
+					<td>{{b.area_sq_mi}}</td>
+					<td>{{b.population}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
