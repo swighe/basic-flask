@@ -1,5 +1,3 @@
 # basic-flask
 
-This step contains the absolute basics of a Flask app.
-
-One route which renders one page with zero templating.
+Combining basic routing and basic templating with requests module in order to create a basic app that views another APIs data.

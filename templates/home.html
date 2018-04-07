@@ -1,6 +1,14 @@
 <html>
 	<body>
-		<h1>A Title</h1>
-		<p>And some content</p>
+		<h1>The 5 Boroughs of NYC</h1>
+		<ul>
+			{% for borough in boroughs %}
+				<li><a href="/view{{borough.path}}">{{borough.name}}</a></li>
+			{% endfor %}
+		</ul>
+		<h1>Other Options</h1>
+		<ul>
+			<li><a href="/combined">View All Together</a></li>
+		</ul>
 	</body>
 </html>
