@@ -24,5 +24,23 @@ Create these files exactly as specified and add + commit + push them to your rep
     * this .txt file named requirements.txt should be located at the same level as your python file
     * the content of the file should simply be `python-2.7.14` since we are using Python 2
     * [example](https://github.com/jameslinjl/basic-flask/blob/master/runtime.txt)
-    
-   
+4. make changes to your python file
+    * you will need to import os at the top of your file if you have not already
+    * you need the following code in your flask python file where you start running the server:
+```python
+if __name__ == "__main__":
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host="0.0.0.0", port=port, threaded=True)
+```
+5. Add + Commit + Push these files to your Github repo
+
+## Heroku Setup
+
+Now we just need to use the Heroku User Interface to link our Github repo with a new Heroku application.
+
+1. Create a new, free [Heroku](https://www.heroku.com/) account (if you don't have one already).
+2. Create a new Heroku app from the [Heroku Dashboard](https://dashboard.heroku.com). The name of your app will correspond to the URL at which it can be reached on the internet.
+3. Go to the `Deploy` tab on your app dashboard.
+4. Select `Github` for the `Deployment method` section.
+5. Click `Deploy Branch` for `master` (assuming all of you are using `master` as your main branch) and your app should be working!
+6. What if it isn't? Click `More` on the upper right and select `View logs`. This will show you logs from your app, which should point you in the right direction for debugging.
