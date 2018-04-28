@@ -1,6 +1,17 @@
 <html>
 	<body>
-		<h1>A Title</h1>
-		<p>And some content</p>
+		<h1>A List of Names</h1>
+		<ul>
+		{% for name in names %}
+			<li>{{name}}</li>
+		{% endfor %}
+		</ul>
+
+		<form action="/add-name" method="post">
+		  Name:<br>
+		  <input type="text" name="name" value="James">
+		  <br>
+		  <input type="submit" value="Submit">
+		</form> 
 	</body>
 </html>
