@@ -4,6 +4,8 @@
 		<ul>
 		{% for name in names %}
 			<li>{{name}}</li>
+			<form action="/delete-name/{{loop.index}}" method="post"><input type="submit" value="Delete"></form> 
+			<br>
 		{% endfor %}
 		</ul>
 
