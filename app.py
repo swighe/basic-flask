@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
 	print request.form
 	return Response(
-		'{"fulfillmentText":"this response came from fulfillment"}',
+		'{"displayText":"this response came from fulfillment"}',
 		mimetype='application/json'
 	) 
 	# return render_template('home.html')
