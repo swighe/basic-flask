@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/fulfill')
+@app.route('/fulfill', methods=['POST'])
 def home():
 	return '{"fulfillmentText":"this response came from fulfillment"}'
 	# return render_template('home.html')
