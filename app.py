@@ -3,9 +3,10 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/fulfill')
 def home():
-	return render_template('home.html')
+	return '{"fulfillmentText":"this response came from fulfillment"}'
+	# return render_template('home.html')
 
 if __name__ == "__main__":
 	port = int(os.environ.get("PORT", 5000))
