@@ -1,10 +1,11 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 import os
 
 app = Flask(__name__)
 
 @app.route('/fulfill', methods=['POST'])
 def home():
+	print request.form
 	return Response(
 		'{"fulfillmentText":"this response came from fulfillment"}',
 		mimetype='application/json'
