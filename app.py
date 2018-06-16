@@ -1,11 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 import os
 
 app = Flask(__name__)
 
 @app.route('/fulfill', methods=['POST'])
 def home():
-	return '{"fulfillmentText":"this response came from fulfillment"}'
+	return Response(
+		'{"fulfillmentText":"this response came from fulfillment"}',
+		mimetype='application/json'
+	) 
 	# return render_template('home.html')
 
 if __name__ == "__main__":
