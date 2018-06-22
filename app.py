@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/fulfill', methods=['POST'])
 def home():
-	print request.form
+	print request.form.to_dict()
 	return Response(
 		'{"displayText":"this response came from fulfillment","speech":"SAY SOMETHING"}',
 		mimetype='application/json'
