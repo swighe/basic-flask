@@ -1,0 +1,20 @@
+<html>
+  <body>
+    <h1>Check In</h1>
+    <form method="post">
+      <table>
+        <tr>
+          <th>Select</th>
+          <th>Name</th> 
+        </tr>
+        {% for person in people %}
+          <tr>
+            <td><input type="checkbox" name="{{person.id}}"></td>
+            <td>{{person.first_name}} {{person.last_name}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      <input type="submit" value="Check In">
+    </form>
+  </body>
+</html>
