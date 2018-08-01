@@ -9,7 +9,7 @@ def home():
 	print request.json
 	print request.query_string
 	return Response(
-		'{"displayText":"this response came from fulfillment","speech":"SAY SOMETHING"}',
+		'{"fulfillmentText":"this response came from fulfillment"}',
 		mimetype='application/json'
 	) 
 	# return render_template('home.html')
