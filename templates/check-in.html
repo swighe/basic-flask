@@ -31,6 +31,28 @@
     </DieCutLabel>');
         var labelSet = new dymo.label.framework.LabelSetBuilder();
 
+        // select printer to print on
+        // for simplicity sake just use the first LabelWriter printer
+        var printers = dymo.label.framework.getPrinters();
+        if (printers.length === 0) {
+          alert('No DYMO printers are installed. Install DYMO printers.');
+        }
+
+        var printerName = "";
+        for (var i = 0; i < printers.length; ++i)
+        {
+            var printer = printers[i];
+            if (printer.printerType === "LabelWriterPrinter")
+            {
+                printerName = printer.name;
+                break;
+            }
+        }
+        
+        if (printerName === "") {
+          alert('No LabelWriter printers found. Install LabelWriter printer');
+        }
+
         var checkboxes = document.getElementsByClassName('checkbox');
         // commented out sections for debugging
         // var text = 'Print the following:';
@@ -41,7 +63,7 @@
             // text += '\n' + checkboxes[i].name;
           }
         }
-        label.print('DYMO LabelWriter 450', '', labelSet);
+        label.print(printerName, '', labelSet);
         // alert(text);
       }
     </script>
