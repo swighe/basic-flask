@@ -1,4 +1,28 @@
 <html>
+  <head>
+    <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"> </script>
+    <script src="PrintLabel.js" type="text/javascript" charset="UTF-8"> </script>
+    <script>
+      function printLabelsForSelected() {
+        // this may need to have more configuration to print the format we want
+        var label = dymo.label.framework.openLabelXml("<?xml>");
+        var labelSet = new dymo.label.framework.LabelSetBuilder();
+
+        var checkboxes = document.getElementsByClassName('checkbox');
+        // commented out sections for debugging
+        // var text = 'Print the following:';
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            var record = labelSet.addRecord();
+            record.setText("Name", checkboxes[i].name);
+            // text += '\n' + checkboxes[i].name;
+          }
+        }
+        label.print('DYMO LabelWriter 450', '', labelSet);
+        // alert(text);
+      }
+    </script>
+  </head>
   <body>
     <h1>Check In</h1>
     <form method="post">
@@ -9,12 +33,12 @@
         </tr>
         {% for person in people %}
           <tr>
-            <td><input type="checkbox" name="{{person.id}}"></td>
+            <td><input type="checkbox" name="{{person.first_name}} {{person.last_name}}" class="checkbox"></td>
             <td>{{person.first_name}} {{person.last_name}}</td>
           </tr>
         {% endfor %}
       </table>
-      <input type="submit" value="Check In">
+      <button onclick="printLabelsForSelected()">Check In</button>
     </form>
   </body>
 </html>

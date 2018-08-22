@@ -1,30 +1,16 @@
 from flask import Flask, render_template, request, url_for, redirect
 import ast
+import json
 import os
-import re
+import requests
 
 app = Flask(__name__)
-
-people_data = [
-	{
-		'id': 1,
-		'first_name': 'James',
-		'last_name': 'Lin',
-		'phone': '302-668-3584'
-	},
-	{
-		'id': 2,
-		'first_name': 'Tanni',
-		'last_name': 'Kufferath-Lin',
-		'phone': '805-345-1086'
-	},
-	{
-		'id': 3,
-		'first_name': 'James',
-		'last_name': 'Not-Lin',
-		'phone': '123-456-7890'
-	}
-]
+base_breeze_api_endpoint = 'https://yourmnc.breezechms.com/api'
+breeze_api_key = os.environ.get("BREEZE_API_KEY")
+# currently using "Emergency Contact Phone Number 1"
+phone_number_field_id = '1055797162'
+# currently using "Label"
+name_field_id = '11106318'
 
 def is_int(maybe_int):
 	try:
@@ -33,38 +19,41 @@ def is_int(maybe_int):
 		return False
 	return True
 
-def get_people(search_param):
+def search_people(search_param):
 	search_param_is_int = is_int(search_param)
 	matching_people = []
-	lower_search_param = search_param.lower()
+	people_data = []
+	if search_param_is_int:
+		people_data = requests.get(
+			base_breeze_api_endpoint + '/people',
+			headers={'api-key': breeze_api_key},
+			params={'filter_json': json.dumps({phone_number_field_id + '_contains': search_param})}
+		).json()
+	else:
+		people_data = requests.get(
+			base_breeze_api_endpoint + '/people',
+			headers={'api-key': breeze_api_key},
+			params={'filter_json': json.dumps({name_field_id + '_contains': search_param})}
+		).json()
 	for person in people_data:
-		if search_param_is_int:
-			if re.search(search_param + '$', person['phone']) is not None:
-				matching_people.append(person)
-				continue
-		else:
-			if person['first_name'].lower() == lower_search_param:
-				matching_people.append(person)
-				continue
-			if person['last_name'] == lower_search_param:
-				matching_people.append(person)
-				continue
-	# get all people
-	# if search_param is numeric, then match on phone last 4
-	# else match on either first name or last name (make lower)
+		matching_people.append({
+			'id': person['id'],
+			'first_name': person['first_name'],
+			'last_name': person['last_name']
+		})
 	return matching_people
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
 	if request.method == 'POST':
-		people_results = get_people(request.form['check_in_input'])
+		people_results = search_people(request.form['check_in_input'])
 		# check for success, if failure, then show no results page
 		return redirect(url_for('check_in', people=people_results))
 	return render_template('home.html')
 
 def print_name_tags(ids):
 	for id in ids:
-		print 'PRINT NAMETAG FOR PERSON WITH ID: ' + id
+		print ('SELECTED PERSON WITH NAME: ' + id)
 
 @app.route('/check-in?people=<people>', methods=['GET', 'POST'])
 def check_in(people):
