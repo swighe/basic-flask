@@ -1,11 +1,34 @@
 <html>
   <head>
     <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"> </script>
-    <script src="PrintLabel.js" type="text/javascript" charset="UTF-8"> </script>
     <script>
       function printLabelsForSelected() {
-        // this may need to have more configuration to print the format we want
-        var label = dymo.label.framework.openLabelXml("<?xml>");
+        // pulled the configuration from - http://www.labelwriter.com/software/dls/sdk/samples/js/PrintLabel/PrintLabel.js
+        var label = dymo.label.framework.openLabelXml('<?xml version="1.0" encoding="utf-8"?>\
+    <DieCutLabel Version="8.0" Units="twips">\
+        <PaperOrientation>Landscape</PaperOrientation>\
+        <Id>Address</Id>\
+        <PaperName>30252 Address</PaperName>\
+        <DrawCommands/>\
+        <ObjectInfo>\
+            <TextObject>\
+                <Name>Text</Name>\
+                <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />\
+                <BackColor Alpha="0" Red="255" Green="255" Blue="255" />\
+                <LinkedObjectName></LinkedObjectName>\
+                <Rotation>Rotation0</Rotation>\
+                <IsMirrored>False</IsMirrored>\
+                <IsVariable>True</IsVariable>\
+                <HorizontalAlignment>Left</HorizontalAlignment>\
+                <VerticalAlignment>Middle</VerticalAlignment>\
+                <TextFitMode>ShrinkToFit</TextFitMode>\
+                <UseFullFontHeight>True</UseFullFontHeight>\
+                <Verticalized>False</Verticalized>\
+                <StyledText/>\
+            </TextObject>\
+            <Bounds X="332" Y="150" Width="4455" Height="1260" />\
+        </ObjectInfo>\
+    </DieCutLabel>');
         var labelSet = new dymo.label.framework.LabelSetBuilder();
 
         var checkboxes = document.getElementsByClassName('checkbox');
