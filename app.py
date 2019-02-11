@@ -18,7 +18,7 @@ select_users = 'SELECT * FROM user'
 def create_mysql_connection():
 	connection = mysql.connector.connect(user=os.environ.get('AWS_USER'), password=os.environ.get('AWS_PASS'),
 								host=os.environ.get('AWS_HOST'), database=os.environ.get('AWS_DB'))
-	print connection
+	print(connection)
 	return connection
 
 def write_data(sql_command, data):
