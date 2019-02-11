@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response
 import json
 import os
 import mysql.connector
+from mysql.connector import errorcode
 from base64 import b64encode
 from sys import exit
 
