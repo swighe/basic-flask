@@ -6,7 +6,7 @@ from base64 import b64encode
 from sys import exit
 
 if 'AWS_USER' not in os.environ or 'AWS_PASS' not in os.environ or 'AWS_HOST' not in os.environ or 'AWS_DB' not in os.environ:
-	print 'Missing required env vars AWS_USER, AWS_PASS, AWS_HOST, AWS_DB'
+	print('Missing required env vars AWS_USER, AWS_PASS, AWS_HOST, AWS_DB')
 	exit()
 
 app = Flask(__name__)
