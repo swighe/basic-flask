@@ -16,8 +16,8 @@ select_users_where = 'SELECT * FROM user WHERE username = %s'
 select_users = 'SELECT * FROM user'
 
 def create_mysql_connection():
-	return mysql.connector.connect(user=os.environ['AWS_USER'], password=os.environ['AWS_PASS'],
-								host=os.environ['AWS_HOST'], database=os.environ['AWS_DB'])
+	return mysql.connector.connect(user=os.environ.get('AWS_USER'), password=os.environ.get('AWS_PASS'),
+								host=os.environ.get('AWS_HOST'), database=os.environ.get('AWS_DB'))
 
 def write_data(sql_command, data):
 	cnx = create_mysql_connection()
