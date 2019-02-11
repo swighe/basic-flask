@@ -30,7 +30,9 @@ def write_data(sql_command, data):
 	return id
 
 def read_data(sql_command, data):
+	print('start read_data')
 	cnx = create_mysql_connection()
+	print('mysql_connection created')
 	cursor = cnx.cursor(dictionary=True)
 	result = []
 	cursor.execute(sql_command, data)
@@ -82,7 +84,9 @@ def handle_user_get_filter(username):
 
 def handle_user_get():
 	try:
+		print('handle_user_get')
 		results = read_data(select_users, ())
+		print('data read')
 		return create_success_response(results)
 	except:
 		return create_server_error_response('Something went wrong trying to read from the mysql database', status=503)
@@ -123,4 +127,4 @@ def home():
 
 if __name__ == "__main__":
 	port = int(os.environ.get("PORT", 5000))
-	app.run(host="0.0.0.0", port=port, threaded=True, debug=True)
+	app.run(host="0.0.0.0", port=port, threaded=True)
