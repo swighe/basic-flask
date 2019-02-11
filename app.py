@@ -124,7 +124,7 @@ def handle_auth():
 	except:
 		return create_server_error_response('Something went wrong trying to read from the mysql database', status=503)
 	
-	token_value = b64encode(username)
+	token_value = b64encode(username.encode('utf-8')).decode('utf-8')
 	response = create_success_response({ 'token': token_value })
 	response.set_cookie('sillyauth', token_value)
 	return response
