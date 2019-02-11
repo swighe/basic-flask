@@ -85,13 +85,13 @@ def handle_user_get_filter(username):
 		return create_server_error_response('Something went wrong trying to read from the mysql database', status=503)
 
 def handle_user_get():
-	try:
-		print('handle_user_get')
-		results = read_data(select_users, ())
-		print('data read')
-		return create_success_response(results)
-	except:
-		return create_server_error_response('Something went wrong trying to read from the mysql database', status=503)
+	# try:
+	print('handle_user_get')
+	results = read_data(select_users, ())
+	print('data read')
+	return create_success_response(results)
+	# except:
+	# 	return create_server_error_response('Something went wrong trying to read from the mysql database', status=503)
 
 @app.route('/user', methods=['GET', 'POST'])
 def handle_user():
