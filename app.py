@@ -198,10 +198,8 @@ def handle_todo_item_with_id_put(data, todo_item_id, user_id):
     except:
         return create_client_error_response('Payload was not valid JSON. You must pass valid JSON.')
 
-    if 'content' not in data_json or 'completed' not in data_json:
-        return create_client_error_response('Payload did not contain both required fields "content" and "completed".')
-    content = data_json['content']
-    completed = data_json['completed']
+    if 'content' not in data_json and 'completed' not in data_json:
+        return create_client_error_response('Payload did not contain one of fields "content" and "completed".')
 
     try:
         results = read_data(
@@ -210,6 +208,15 @@ def handle_todo_item_with_id_put(data, todo_item_id, user_id):
             return create_client_error_response('Could not put update todo-item %s as user %s.' % (todo_item_id, user_id))
     except:
         return create_server_error_response('Something went wrong trying to write to the mysql database', status=503)
+
+    if 'content' in data_json:
+        content = data_json['content']
+    else:
+        content = results[0]['content']
+    if 'completed' in data_json:
+        completed = data_json['completed']
+    else:
+        completed = bool(results[0]['completed'])
 
     try:
         write_data(update_todo_items_where_id,
