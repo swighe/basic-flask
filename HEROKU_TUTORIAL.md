@@ -22,7 +22,7 @@ Create these files exactly as specified and add + commit + push them to your rep
     * if you are comfortable using the terminal, you can also run this command from the terminal (at the same level as your python file). You should run `pip freeze > requirements.txt` and this will generate a correct list for you.
 3. runtime.txt
     * this .txt file named requirements.txt should be located at the same level as your python file
-    * the content of the file should simply be `python-2.7.14` since we are using Python 2
+    * the content of the file should simply be `python-2.7.15` since we are using Python 2
     * [example](https://github.com/jameslinjl/basic-flask/blob/master/runtime.txt)
 4. make changes to your python file
     * you will need to import os at the top of your file if you have not already
