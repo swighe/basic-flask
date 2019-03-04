@@ -1,6 +1,22 @@
 <html>
 	<body>
-		<h1>A Title</h1>
-		<p>And some content</p>
+		<h1>Products</h1>
+		<ul>
+            {% for product in products %}
+                <li>
+                    <ul>
+                        <li>
+                            {{ product.name }}
+                        </li>
+                        <li>
+                            {{ product.manufacturer }}
+                        </li>
+                        <li>
+                            {{ product.submission_date }}
+                        </li>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
 	</body>
 </html>
